@@ -1,6 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" }
-  ]
-}
+2  "version": 2,
+3  "builds": [
+4    {
+5      "src": "index.html",
+6      "use": "@vercel/static"
+7    },
+8    {
+9      "src": "literature-section.html",
+10      "use": "@vercel/static"
+11    }
+12  ]
+13}

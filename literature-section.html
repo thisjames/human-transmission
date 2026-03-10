@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Other Disciplines Say — Human Transmission Problem</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #c9a84c;
+    --accent2: #7eb8a4;
+    --accent3: #c47b6b;
+    --accent4: #8b7ec8;
+    --text: #e8e4dc;
+    --muted: #6b6760;
+    --highlight: #1e1e1e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    padding: 48px 60px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-intro {
+    margin-top: 20px;
+    max-width: 680px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #a8a49c;
+  }
+
+  .main {
+    padding: 60px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* DISCIPLINE BLOCK */
+  .discipline {
+    border-bottom: 1px solid var(--border);
+    padding: 52px 0;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .discipline:last-child {
+    border-bottom: none;
+  }
+
+  .discipline-meta {
+    position: sticky;
+    top: 40px;
+  }
+
+  .discipline-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--discipline-color, var(--accent));
+    opacity: 0.12;
+    margin-bottom: 8px;
+  }
+
+  .discipline-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--discipline-color, var(--accent));
+    margin-bottom: 12px;
+  }
+
+  .discipline-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .discipline-thinkers {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .discipline-thinkers span {
+    display: block;
+    color: var(--discipline-color, var(--accent));
+    opacity: 0.7;
+  }
+
+  /* CONTENT SIDE */
+  .discipline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .discipline-lede {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 2vw, 21px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: #c8c4bc;
+    border-left: 2px solid var(--discipline-color, var(--accent));
+    padding-left: 24px;
+  }
+
+  .discipline-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #9a9690;
+  }
+
+  .discipline-body p + p {
+    margin-top: 18px;
+  }
+
+  .discipline-body strong {
+    color: #c8c4bc;
+    font-weight: 500;
+  }
+
+  /* KEY INSIGHT CALLOUT */
+  .key-insight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--discipline-color, var(--accent));
+    padding: 20px 24px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #8a8680;
+  }
+
+  .key-insight::before {
+    content: 'KEY INSIGHT';
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--discipline-color, var(--accent));
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  /* SYNTHESIS BLOCK */
+  .synthesis {
+    margin-top: 60px;
+    padding: 48px 40px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    position: relative;
+  }
+
+  .synthesis::before {
+    content: 'SYNTHESIS';
+    position: absolute;
+    top: -10px;
+    left: 32px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+
+  .synthesis h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .synthesis p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #9a9690;
+    max-width: 780px;
+  }
+
+  .synthesis p + p {
+    margin-top: 16px;
+  }
+
+  .synthesis strong {
+    color: #c8c4bc;
+    font-weight: 500;
+  }
+
+  footer {
+    padding: 24px 60px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    header, .main, footer { padding-left: 24px; padding-right: 24px; }
+    .discipline { grid-template-columns: 1fr; gap: 28px; }
+    .discipline-meta { position: static; }
+    .discipline-number { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow"><a href="index.html" style="color:var(--accent); text-decoration:none; opacity:0.7;">← Framework</a> &nbsp;/&nbsp; The Human Transmission Problem — Literature</div>
+  <h1>What Other Disciplines<br>Have <em>Already</em> Found</h1>
+  <p class="header-intro">No single field has named this problem directly. But philosophy, anthropology, sociology and cognitive science have each been circling it for decades — arriving at the same terrain from different directions, without quite realising they were describing the same thing.</p>
+</header>
+
+<div class="main">
+
+  <!-- PHILOSOPHY -->
+  <div class="discipline" style="--discipline-color: #c9a84c;">
+    <div class="discipline-meta">
+      <div class="discipline-number">01</div>
+      <div class="discipline-tag">Discipline</div>
+      <div class="discipline-name">Philosophy of Knowledge</div>
+      <div class="discipline-thinkers">
+        Key thinkers
+        <span>Michael Polanyi</span>
+        <span>Gilbert Ryle</span>
+        <span>Ludwig Wittgenstein</span>
+      </div>
+    </div>
+    <div class="discipline-content">
+      <div class="discipline-lede">We can know more than we can tell. That single sentence, written by philosopher Michael Polanyi in 1966, may be the most important observation ever made about why human wisdom fails to compound.</div>
+      <div class="discipline-body">
+        <p>Polanyi spent his career trying to understand how scientists actually work — and what he found was deeply uncomfortable for anyone who believed knowledge was simply information waiting to be written down. The expertise of a master glassblower, a skilled diagnostician, an experienced investor — these are not just collections of facts and rules. They are something closer to a bodily understanding, built through years of practice and feedback that no instruction manual can fully capture.</p>
+        <p>He called this <strong>tacit knowledge</strong> — the vast domain of understanding that lives in practitioners rather than in texts. And its defining feature is precisely its resistance to transmission. You cannot hand it over. You can only hope that someone learns it the same way you did: slowly, through experience, through failure, through the kind of direct engagement with the world that no shortcut replaces.</p>
+        <p>Gilbert Ryle drew the underlying distinction most cleanly. He separated <strong>"knowing that"</strong> — propositional knowledge, the kind you can state in a sentence — from <strong>"knowing how"</strong>, the practical competence that underlies all real skill. Language is extraordinarily good at the first. It is profoundly limited when it comes to the second. We can tell someone that good timing matters in a negotiation. We cannot give them the felt sense of when the moment has arrived.</p>
+      </div>
+      <div class="key-insight">Philosophy's contribution is the most fundamental: the problem is not that we fail to write things down. It is that the most important things cannot be written down. The medium is inadequate to the content — and no improvement in the medium will fully solve this.</div>
+    </div>
+  </div>
+
+  <!-- EVOLUTIONARY ANTHROPOLOGY -->
+  <div class="discipline" style="--discipline-color: #7eb8a4;">
+    <div class="discipline-meta">
+      <div class="discipline-number">02</div>
+      <div class="discipline-tag">Discipline</div>
+      <div class="discipline-name">Evolutionary Anthropology</div>
+      <div class="discipline-thinkers">
+        Key thinkers
+        <span>Joseph Henrich</span>
+        <span>Michael Tomasello</span>
+        <span>Robert Boyd</span>
+      </div>
+    </div>
+    <div class="discipline-content">
+      <div class="discipline-lede">Humans are the only species with cumulative culture — the ability to build on what previous generations learned. This is our greatest strength. It is also the source of the problem.</div>
+      <div class="discipline-body">
+        <p>Joseph Henrich's research into cultural evolution offers a reframe that is both reassuring and unsettling in equal measure. His argument is that human civilisational progress was never really about individual intelligence. It was about our unique capacity to pool and accumulate knowledge across generations — each one adding small refinements to tools, practices and ideas until they become far too complex for any single mind to have invented.</p>
+        <p>The canoe, the bow and arrow, the practice of fermenting food to prevent poisoning — none of these were designed by one brilliant person. They emerged slowly, socially, across time. <strong>The collective is the genius. The individual is the vessel.</strong></p>
+        <p>This is not a failure of our species — it is precisely how we work. But it creates a structural truth that we tend to resist: wisdom, in the deepest sense, does not live in individuals. It lives in cultures, practices, institutions and lineages. When those get disrupted — when the chain breaks — the knowledge doesn't simply go dormant. It disappears. Henrich documents cases of isolated human populations who lost critical survival technologies within a few generations simply because the intergenerational chain of practice was severed.</p>
+      </div>
+      <div class="key-insight">Anthropology's contribution is a humbling one: the expectation that a person should carry and transmit wisdom individually is a misunderstanding of how our species actually works. We were built to pool it collectively — which means the problem is not a bug to fix but a feature to design around.</div>
+    </div>
+  </div>
+
+  <!-- SOCIOLOGY OF KNOWLEDGE -->
+  <div class="discipline" style="--discipline-color: #c47b6b;">
+    <div class="discipline-meta">
+      <div class="discipline-number">03</div>
+      <div class="discipline-tag">Discipline</div>
+      <div class="discipline-name">Sociology of Knowledge</div>
+      <div class="discipline-thinkers">
+        Key thinkers
+        <span>Derek de Solla Price</span>
+        <span>Émile Durkheim</span>
+        <span>Basil Bernstein</span>
+      </div>
+    </div>
+    <div class="discipline-content">
+      <div class="discipline-lede">In 1961, a historian of science named Derek de Solla Price did something nobody had thought to do before: he counted. What he found should have changed everything about how we think about education and progress.</div>
+      <div class="discipline-body">
+        <p>Price documented that scientific publications had been doubling every ten to fifteen years since at least 1900 — a trend that, he noted with some alarm, could not continue indefinitely without catastrophic consequences for how knowledge is absorbed and used. That was over sixty years ago. The trend has not slowed. If anything it has accelerated.</p>
+        <p>The implication is stark. Every generation inherits not just more knowledge than the last, but <strong>exponentially more</strong>. The gap between what humanity collectively knows and what any individual can absorb in a lifetime does not stay constant — it widens structurally, relentlessly, with every passing decade. The frontier of any given field recedes faster than any individual can chase it.</p>
+        <p>Durkheim had anticipated the social consequence a generation earlier. His argument was that complex societies distribute knowledge across their members the way a body distributes function across organs — no single part contains the whole. This is efficient. It is also fragile. It means that the capacity for synthesis — for understanding how the parts relate to each other — becomes increasingly rare and increasingly valuable, even as the system makes it increasingly difficult to develop.</p>
+      </div>
+      <div class="key-insight">Sociology's contribution is the macro picture: the widening gap is not a crisis of individual failure but a structural feature of how knowledge grows. No amount of individual effort can close a gap that is expanding exponentially. This reframes the problem from a personal challenge into a civilisational design question.</div>
+    </div>
+  </div>
+
+  <!-- COGNITIVE SCIENCE -->
+  <div class="discipline" style="--discipline-color: #8b7ec8;">
+    <div class="discipline-meta">
+      <div class="discipline-number">04</div>
+      <div class="discipline-tag">Discipline</div>
+      <div class="discipline-name">Cognitive Science &amp; Psychology</div>
+      <div class="discipline-thinkers">
+        Key thinkers
+        <span>Herbert Simon</span>
+        <span>George Miller</span>
+        <span>Daniel Kahneman</span>
+      </div>
+    </div>
+    <div class="discipline-content">
+      <div class="discipline-lede">The human brain is a remarkable instrument. It is also running on hardware that has not meaningfully updated in fifty thousand years — while the information environment around it has become almost incomprehensibly more complex.</div>
+      <div class="discipline-body">
+        <p>Cognitive science gives us the biological floor beneath all of this. George Miller's landmark 1956 paper established that working memory — the active workspace where thinking happens — is limited to roughly seven items at any given moment. This is not a cultural limitation or an educational failure. It is an architectural fact about the organ we think with. It has not changed since the Palaeolithic, and it will not change in our lifetimes.</p>
+        <p>Herbert Simon extended this insight into what he called <strong>bounded rationality</strong> — the observation that all human decision-making takes place within hard cognitive limits. We do not optimise; we satisfice. We do not survey all available information; we sample. This is not laziness. It is the only strategy available to a finite mind operating in an infinite information environment. And as that environment grows, the proportion of it that any individual can meaningfully engage with necessarily shrinks.</p>
+        <p>Kahneman's work adds a further layer: even the thinking we do manage to do is systematically distorted by cognitive shortcuts — heuristics that served us well in simpler environments but misfire reliably in complex modern ones. The result is a species whose cognitive architecture is increasingly mismatched to the world its collective intelligence has built.</p>
+      </div>
+      <div class="key-insight">Cognitive science's contribution is the hardest limit: the brain is not upgradeable on any timescale that matters. The biological ceiling is real, fixed, and increasingly mismatched to the complexity of the civilisation it has produced. Any solution to the transmission problem must work within this constraint, not around it.</div>
+    </div>
+  </div>
+
+  <!-- SYNTHESIS -->
+  <div class="synthesis">
+    <h2>Four disciplines. One problem nobody has fully named.</h2>
+    <p>What is striking about this body of work is not any single insight — it is the pattern across all of them. Philosophy found that wisdom resists language at the individual level. Anthropology found that human progress was always collective, never individual. Sociology measured the exponential widening of the gap at the civilisational level. Cognitive science located the biological ceiling that makes the gap permanent.</p>
+    <p>Each discipline identified one face of the same problem. None assembled the whole. The Human Transmission Problem is the name for what they were all describing — the structural impossibility of passing on what matters most, at every scale from a single life to an entire civilisation. <strong>That gap in the literature is where this project begins.</strong></p>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Human Transmission Problem — Literature Review</span>
+  <span>Working draft · Four disciplines</span>
+</footer>
+
+</body>
+</html>

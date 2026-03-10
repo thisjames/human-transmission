@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561.61">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Lucida Grande'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;The Human Transmission Problem — Framework&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=DM+Mono:wght@300;400;500&amp;family=DM+Sans:wght@300;400;500&amp;display=swap');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--bg: #0e0e0e;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--surface: #161616;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--border: #2a2a2a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--accent: #c9a84c;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--accent2: #7eb8a4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--accent3: #c47b6b;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--accent4: #8b7ec8;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text: #e8e4dc;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--muted: #6b6760;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--highlight: #1e1e1e;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Sans', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>header {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 48px 60px 32px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header-left h1 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(28px, 4vw, 48px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header-left h1 em {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header-left p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.05em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.legend {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.06em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.legend-item {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.legend-dot {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.main {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 48px 60px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* CORE PARADOX — top */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.core-paradox {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--surface);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 36px 40px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.core-paradox:hover { background: #1c1c1c; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.core-paradox::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: 'CENTRAL THESIS';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>top: -10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>left: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.12em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.core-paradox h2 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(16px, 2.5vw, 24px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.core-paradox .expand-hint {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expandable-content {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.7;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #b0aca4;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.expandable-content.open { display: block; animation: fadeIn 0.3s ease; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* THREE PILLARS */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.section-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.14em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillars {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(3, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--surface);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 28px 28px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: border-color 0.2s, background 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar:hover { background: var(--highlight); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar.active { border-color: var(--pillar-color); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar-number {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--pillar-color);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.25;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>right: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar-tag {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--pillar-color);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar h3 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.3;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #9a9690;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar .detail {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.65;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #8a8680;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar .detail.open { display: block; animation: fadeIn 0.3s ease; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pillar .thinkers {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--pillar-color);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* TWO SCALES */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scales {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--surface);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.2s, border-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card:hover { background: var(--highlight); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card .scale-tag {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card h3 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #9a9690;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card .detail {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.65;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #8a8680;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.scale-card .detail.open { display: block; animation: fadeIn 0.3s ease; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* OUTPUTS */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.outputs {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(3, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--surface);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 24px 24px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.2s, border-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card:hover { background: var(--highlight); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card .out-tag {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card h3 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 17px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.3;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #9a9690;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card .detail {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.65;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #8a8680;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.output-card .detail.open { display: block; animation: fadeIn 0.3s ease; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* OPEN QUESTIONS */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.questions-grid {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(2, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-item {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--surface);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-left: 3px solid var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 16px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: #a0a09a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-item::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '?';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-style: normal;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* FLOW ARROWS */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.flow-connector {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 4px 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.flow-connector::before,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.flow-connector::after {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>footer {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 24px 60px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Mono', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width: 900px) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>header, .main, footer { padding-left: 24px; padding-right: 24px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.pillars, .outputs { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.scales, .questions-grid { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;The &lt;em&gt;Human Transmission&lt;/em&gt;&lt;br&gt;Problem&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Click any node to expand — v0.1 working draft&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="legend"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="legend-item"&gt;&lt;div class="legend-dot" style="background:#c9a84c"&gt;&lt;/div&gt; Core problem&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="legend-item"&gt;&lt;div class="legend-dot" style="background:#7eb8a4"&gt;&lt;/div&gt; Micro scale&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="legend-item"&gt;&lt;div class="legend-dot" style="background:#c47b6b"&gt;&lt;/div&gt; Macro scale&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="legend-item"&gt;&lt;div class="legend-dot" style="background:#8b7ec8"&gt;&lt;/div&gt; Applications&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="main"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- CENTRAL THESIS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="core-paradox" onclick="toggleExpand(this)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Civilisational knowledge compounds across generations. Human capacity to absorb it does not. The gap between what humanity collectively knows and what any individual can master is structurally widening — and accelerating.&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expandable-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>Humanity's unique gift — cumulative, transmissible knowledge — has produced extraordinary civilisational progress. Yet this same system contains a deep structural flaw: while collective knowledge grows exponentially, individual human capacity to absorb it remains biologically fixed. Every person arrives blank, requires ~20 years to become functional, and can only ever master a narrow fragment. Wisdom — the capacity to judge, connect and navigate — resists language and cannot be meaningfully inherited, meaning each generation must re-earn it from scratch. The result is a civilisation of immense collective power but fragmented individual understanding.</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="expand-hint"&gt;<span class="s1">↓</span> expand thesis&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="flow-connector"&gt;manifests at two scales&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- TWO SCALES --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-label"&gt;The Problem at Two Scales&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="scales"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scale-card" onclick="toggleExpand(this)" style="border-left: 3px solid #7eb8a4;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="scale-tag" style="color:#7eb8a4"&gt;Micro — The Individual&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Why Hard-Won Wisdom Dies With Its Bearer&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Privilege removes the formative friction that created the privileged person. Each generation inherits advantages but not the judgment earned to sustain them.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="detail"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>A highly successful first generation gives the next every advantage — wealth, education, networks. Yet the second generation frequently achieves less, and the third less still. This isn't failure of effort or intelligence. It's structural: the very struggles that forged the first generation's judgment are inaccessible to those who follow, because that success eliminated them. Language can transmit information about those struggles, but not the felt experience of them. The knowledge that matters most — how to navigate ambiguity, how to read people, when to take risk — is tacit. It lived in the body and experience of the earner, not in their advice.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="thinkers"&gt;Polanyi · tacit knowledge · intergenerational transmission&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scale-card" onclick="toggleExpand(this)" style="border-left: 3px solid #c47b6b;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="scale-tag" style="color:#c47b6b"&gt;Macro — Civilisation&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;The Widening Gap Between Knowing and Understanding&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Scientific knowledge doubles every ~9 years. Human lifetimes do not. The frontier has become so fragmented that no individual can stand near more than a sliver of it.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="detail"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>For most of history the frontier of knowledge was traversable — Newton worked in optics, mechanics and mathematics simultaneously. That world ended in the late 19th century. Today a physics PhD student spends a decade becoming competent enough to ask a novel question in a narrow sub-field. Most scientific papers are read by fewer than ten people who fully understand them. The "unit of progress" has shifted from the individual to the institution and team. This creates a civilisation extraordinarily good at executing within defined problems, but increasingly unable to question whether those problems are the right ones to solve.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="thinkers"&gt;de Solla Price · Simon (bounded rationality) · Durkheim&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="flow-connector"&gt;rooted in three core mechanisms&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- THREE PILLARS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-label"&gt;Three Core Mechanisms&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="pillars"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pillar" onclick="toggleExpand(this)" style="--pillar-color: #c9a84c;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pillar-number"&gt;1&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pillar-tag"&gt;The Transmission Problem&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Wisdom Resists Language&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;The knowledge that matters most — judgment, intuition, resilience — is tacit. It cannot be encoded in words without catastrophic loss.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="detail"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Language is extraordinarily good at transmitting explicit, propositional knowledge: facts, rules, procedures. It is very poor at transmitting the knowing-how that underlies all real expertise. Polanyi's observation that "we can know more than we can tell" captures this precisely. A grandfather can tell his grandson to be patient in negotiations; he cannot transfer the felt memory of the deal that taught him why. This is not a failure of language skill — it is a fundamental limitation of the medium.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="thinkers"&gt;Polanyi · Ryle (knowing-how vs knowing-that) · Wittgenstein&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pillar" onclick="toggleExpand(this)" style="--pillar-color: #7eb8a4;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pillar-number"&gt;2&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pillar-tag"&gt;The Bootstrapping Problem&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Every Human Starts Blank&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Despite millennia of accumulated knowledge, a child still requires ~20 years to become a functional adult. This timeline has not meaningfully compressed.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="detail"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>A Roman child and a modern child take roughly the same time to become a capable adult, despite us knowing vastly more. Cognitive, emotional, and embodied development has timelines that cannot be fast-forwarded by information access. The 20-year overhead is a fixed cost civilisation pays every generation, and as complexity grows, the additional specialisation required on top of that baseline extends the runway further — to 25, 28, 30 years before someone can operate at the frontier of a complex field.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="thinkers"&gt;Developmental psychology · Piaget · education theory&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pillar" onclick="toggleExpand(this)" style="--pillar-color: #c47b6b;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pillar-number"&gt;3&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="pillar-tag"&gt;The Specialisation Trap&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Going Deeper Means Going Narrower&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;The rational response to an ocean of knowledge is specialisation — which is precisely what destroys the capacity for synthesis and cross-domain thinking.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="detail"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>Faced with an exponentially growing knowledge base, the individual and the institution rationally respond by narrowing focus. This is locally optimal and globally catastrophic. The specialists who push the frontier are least equipped to question whether the frontier is worth pushing in the direction it's going. Connections between domains — often where the most important insights live — become structurally less visible. The people capable of making them have less time to do so, and less credibility when they do.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="thinkers"&gt;Simon · de Solla Price · Snow (two cultures)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="flow-connector"&gt;and leaves these questions open&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- OPEN QUESTIONS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-label"&gt;Open Questions — To Be Resolved&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="questions-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="question-item"&gt;Can AI genuinely compress the 20-year bootstrapping problem, or does embodied development have hard biological floors?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="question-item"&gt;Is the widening knowledge gap a temporary feature of rapid growth, or a permanent condition of complex civilisation?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="question-item"&gt;What does it actually mean for a person to "contribute" to humanity when the unit of progress has shifted to institutions and teams?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="question-item"&gt;If tacit knowledge resists transmission via language, what medium — if any — transmits it better? Apprenticeship? Simulation? AI interaction?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="question-item"&gt;In career terms: is cross-domain experience a reliable signal of synthetic judgment, or does it as often indicate lack of depth?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="question-item"&gt;What is the business case for investing in tacit knowledge preservation when it is invisible on a balance sheet?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span&gt;The Human Transmission Problem — Framework v0.1&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span&gt;Click any node to expand · Working draft&lt;/span&gt;</p>
+<p class="p1">&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>function toggleExpand(el) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const content = el.querySelector('.expandable-content, .detail');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const hint = el.querySelector('.expand-hint');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!content) return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content.classList.toggle('open');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (hint) hint.textContent = content.classList.contains('open') ? '<span class="s1">↑</span> collapse' : '<span class="s1">↓</span> expand thesis';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el.classList.toggle('active');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

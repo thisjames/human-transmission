@@ -1,10 +1,10 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/", "dest": "/index.html" },
     { "src": "/literature-section", "dest": "/literature-section.html" },
-    { "src": "/infographic", "dest": "/infographic.html" },
     { "src": "/transmission-machines", "dest": "/transmission-machines.html" },
+    { "src": "/infographic", "dest": "/infographic.html" },
+    { "src": "/bibliography", "dest": "/bibliography.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

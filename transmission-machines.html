@@ -5,150 +5,194 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What We Used To Do — The Forgetting Machine</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
   :root {
-    --bg: #0e0e0e;
-    --surface: #161616;
-    --border: #2a2a2a;
-    --accent: #c9a84c;
-    --accent2: #7eb8a4;
-    --accent3: #c47b6b;
-    --accent4: #8b7ec8;
-    --text: #e8e4dc;
-    --muted: #6b6760;
-    --highlight: #1e1e1e;
+    --bg:        #0e0e0e;
+    --surface:   #161616;
+    --highlight: #1c1c1c;
+    --border:    #2a2a2a;
+    --text-hi:   #e8e4dc;
+    --text:      #c8c3b8;
+    --text-lo:   #9e9a92;
+    --muted:     #6b6760;
+    --gold:      #c9a84c;
+    --teal:      #7eb8a4;
+    --coral:     #c47b6b;
+    --purple:    #8b7ec8;
+    --font-body:    'Lora', Georgia, serif;
+    --font-display: 'Playfair Display', serif;
+    --font-mono:    'DM Mono', monospace;
+    --body-size: 16px;
+    --body-lh:   1.9;
+    --measure:   68ch;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    font-weight: 400;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* NAV */
-  header {
-    padding: 48px 60px 32px;
-    border-bottom: 1px solid var(--border);
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .header-eyebrow {
-    font-family: 'DM Mono', monospace;
+  /* ── NAV ─────────────────────────────────────────────── */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: stretch;
+    height: 44px;
+  }
+  .nav-brand {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  .nav-brand:hover { opacity: 0.75; }
+  .nav-links { display: flex; flex: 1; overflow-x: auto; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .nav-link:hover { color: var(--text); background: var(--surface); }
+  .nav-link.current {
+    color: var(--gold);
+    background: rgba(201,168,76,0.06);
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: -1px;
+  }
+
+  /* ── PAGE HEADER ─────────────────────────────────────── */
+  .page-header {
+    padding: 52px 60px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
+    color: var(--gold);
+    margin-bottom: 20px;
   }
-
-  .header-eyebrow a {
-    color: var(--accent);
-    text-decoration: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-  .header-eyebrow a:hover { opacity: 1; }
-
-  header h1 {
-    font-family: 'Playfair Display', serif;
+  .page-header h1 {
+    font-family: var(--font-display);
     font-size: clamp(28px, 4vw, 52px);
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1.08;
     letter-spacing: -0.02em;
+    color: var(--text-hi);
   }
-
-  header h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
+  .page-header h1 em { font-style: italic; color: var(--gold); }
   .header-intro {
-    margin-top: 20px;
-    max-width: 680px;
-    font-size: 16px;
-    line-height: 1.75;
-    color: #a8a49c;
+    margin-top: 22px;
+    max-width: var(--measure);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text);
   }
 
-
-
-  /* MAIN CONTENT */
+  /* ── MAIN ────────────────────────────────────────────── */
   .main {
-    padding: 60px 60px;
+    padding: 0 60px 80px;
     display: flex;
     flex-direction: column;
     gap: 0;
   }
 
-  /* MECHANISM BLOCK */
+  /* ── MECHANISM BLOCK ─────────────────────────────────── */
   .mechanism {
     border-bottom: 1px solid var(--border);
     padding: 56px 0;
     display: grid;
     grid-template-columns: 220px 1fr;
-    gap: 60px;
+    gap: 64px;
     align-items: start;
   }
+  .mechanism:last-of-type { border-bottom: none; }
 
-  .mechanism:last-of-type {
-    border-bottom: none;
-  }
-
-  /* META COLUMN */
+  /* Meta column */
   .mechanism-meta {
     position: sticky;
-    top: 40px;
+    top: 60px;
   }
-
   .mechanism-number {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-display);
     font-size: 72px;
     font-weight: 400;
     line-height: 1;
-    color: var(--m-color, var(--accent));
-    opacity: 0.12;
-    margin-bottom: 8px;
+    color: var(--m-color, var(--gold));
+    opacity: 0.28;
+    margin-bottom: 12px;
   }
-
   .mechanism-tag {
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--m-color, var(--accent));
-    margin-bottom: 12px;
+    color: var(--m-color, var(--gold));
+    margin-bottom: 10px;
   }
-
   .mechanism-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-family: var(--font-display);
+    font-size: 19px;
     font-weight: 400;
     line-height: 1.3;
-    color: var(--text);
-    margin-bottom: 16px;
+    color: var(--text-hi);
+    margin-bottom: 14px;
   }
-
   .mechanism-era {
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     color: var(--muted);
     line-height: 1.8;
     margin-bottom: 4px;
   }
-
   .mechanism-era span {
     display: block;
-    color: var(--m-color, var(--accent));
-    opacity: 0.7;
+    color: var(--m-color, var(--gold));
+    opacity: 0.75;
     font-size: 10px;
   }
 
-  /* STATUS BADGE */
+  /* Status badge */
   .status-badge {
     display: inline-flex;
     align-items: center;
@@ -156,198 +200,178 @@
     margin-top: 16px;
     padding: 5px 10px;
     border: 1px solid var(--border);
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
-
   .status-badge::before {
     content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--status-color, #6b6760);
+    background: var(--status-color, var(--muted));
     flex-shrink: 0;
   }
 
-  /* CONTENT COLUMN */
+  /* Content column */
   .mechanism-content {
     display: flex;
     flex-direction: column;
     gap: 28px;
+    max-width: var(--measure);
   }
 
   .mechanism-lede {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(17px, 2vw, 21px);
+    font-family: var(--font-display);
+    font-size: clamp(17px, 1.8vw, 20px);
     font-weight: 400;
     font-style: italic;
-    line-height: 1.5;
-    color: #c8c4bc;
-    border-left: 2px solid var(--m-color, var(--accent));
+    line-height: 1.55;
+    color: var(--text-hi);
+    border-left: 2px solid var(--m-color, var(--gold));
     padding-left: 24px;
   }
 
   .mechanism-body {
-    font-size: 15px;
-    line-height: 1.85;
-    color: #9a9690;
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    color: var(--text);
   }
+  .mechanism-body p + p { margin-top: 20px; }
+  .mechanism-body strong { color: var(--text-hi); font-weight: 500; }
+  .mechanism-body em { font-style: italic; }
 
-  .mechanism-body p + p {
-    margin-top: 18px;
-  }
-
-  .mechanism-body strong {
-    color: #c8c4bc;
-    font-weight: 500;
-  }
-
-  /* HOW IT WORKED / WHY IT FAILED — two-column callout */
+  /* ── DUAL CALLOUT ────────────────────────────────────── */
   .dual-callout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-
   .callout {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 20px 24px;
-    font-size: 13px;
-    line-height: 1.65;
-    color: #8a8680;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-lo);
+    font-family: var(--font-body);
   }
-
   .callout::before {
     display: block;
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: 10px;
-    opacity: 0.8;
   }
-
   .callout.how-it-worked {
-    border-left: 3px solid var(--m-color, var(--accent));
+    border-left: 3px solid var(--m-color, var(--gold));
   }
-
   .callout.how-it-worked::before {
     content: 'How it worked';
-    color: var(--m-color, var(--accent));
+    color: var(--m-color, var(--gold));
   }
-
   .callout.why-it-failed {
-    border-left: 3px solid #c47b6b;
+    border-left: 3px solid var(--coral);
   }
-
   .callout.why-it-failed::before {
     content: 'Why it failed';
-    color: #c47b6b;
+    color: var(--coral);
   }
 
-  /* SHARED PROPERTIES BLOCK */
+  /* ── SHARED PROPERTIES ───────────────────────────────── */
   .shared-properties {
-    margin-top: 52px;
-    padding: 48px 40px;
+    margin-top: 56px;
+    padding: 44px 40px;
     background: var(--surface);
     border: 1px solid var(--border);
     position: relative;
   }
-
   .shared-properties::before {
-    content: 'WHAT THEY ALL HAD IN COMMON';
+    content: 'What They All Had In Common';
     position: absolute;
     top: -10px;
     left: 32px;
     background: var(--bg);
     padding: 0 8px;
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
-    color: var(--accent);
+    text-transform: uppercase;
+    color: var(--gold);
   }
-
   .properties-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 28px;
     margin-top: 8px;
   }
-
   .prop-item {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
-
   .prop-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 400;
     font-style: italic;
-    color: var(--accent);
+    color: var(--gold);
+    line-height: 1.2;
   }
-
   .prop-body {
-    font-size: 13px;
-    line-height: 1.7;
-    color: #8a8680;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-lo);
+    font-family: var(--font-body);
   }
 
-  /* SYNTHESIS / CLOSING */
+  /* ── SYNTHESIS ───────────────────────────────────────── */
   .synthesis {
-    margin-top: 60px;
-    padding: 48px 40px;
+    margin-top: 56px;
+    padding: 44px 40px;
     background: var(--surface);
-    border: 1px solid var(--accent);
+    border: 1px solid var(--gold);
     position: relative;
   }
-
   .synthesis::before {
-    content: 'THE PATTERN';
+    content: 'The Pattern';
     position: absolute;
     top: -10px;
     left: 32px;
     background: var(--bg);
     padding: 0 8px;
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
-    color: var(--accent);
+    text-transform: uppercase;
+    color: var(--gold);
   }
-
   .synthesis h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(18px, 2.5vw, 26px);
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.2vw, 24px);
     font-weight: 400;
     line-height: 1.4;
-    color: var(--text);
+    color: var(--text-hi);
     margin-bottom: 20px;
+    max-width: var(--measure);
   }
-
   .synthesis p {
-    font-size: 15px;
-    line-height: 1.85;
-    color: #9a9690;
-    max-width: 780px;
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    color: var(--text);
+    max-width: var(--measure);
   }
+  .synthesis p + p { margin-top: 18px; }
+  .synthesis strong { color: var(--text-hi); font-weight: 500; }
 
-  .synthesis p + p {
-    margin-top: 16px;
-  }
-
-  .synthesis strong {
-    color: #c8c4bc;
-    font-weight: 500;
-  }
-
+  /* ── FOOTER ──────────────────────────────────────────── */
   footer {
     padding: 24px 60px;
     border-top: 1px solid var(--border);
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     color: var(--muted);
     display: flex;
@@ -355,17 +379,13 @@
     align-items: center;
   }
 
+  /* ── RESPONSIVE ──────────────────────────────────────── */
   @media (max-width: 860px) {
-    header, .main, footer {
-      padding-left: 24px;
-      padding-right: 24px;
-    }
-    .mechanism {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
+    .page-header, .main, footer { padding-left: 24px; padding-right: 24px; }
+    .mechanism { grid-template-columns: 1fr; gap: 28px; }
     .mechanism-meta { position: static; }
     .mechanism-number { font-size: 48px; }
+    .mechanism-content { max-width: 100%; }
     .dual-callout { grid-template-columns: 1fr; }
     .properties-grid { grid-template-columns: 1fr; }
   }
@@ -373,22 +393,29 @@
 </head>
 <body>
 
-<header>
-  <div class="header-eyebrow">
-    <a href="index.html">← Framework</a>
-    &nbsp;/&nbsp;
-    The Forgetting Machine — What We Used To Do
+<!-- NAV -->
+<nav class="site-nav">
+  <a class="nav-brand" href="index.html">TFM</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Framework</a>
+    <a class="nav-link" href="literature-section.html">What Disciplines Say</a>
+    <a class="nav-link current" href="transmission-machines.html">What We Used To Do</a>
+    <a class="nav-link" href="infographic.html">Infographic</a>
+    <a class="nav-link" href="bibliography.html">Bibliography</a>
   </div>
+</nav>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="eyebrow">The Forgetting Machine</div>
   <h1>What We <em>Used To Do</em></h1>
   <p class="header-intro">Before the university replaced the guild, the certificate replaced the apprenticeship, and the textbook replaced the master — civilisation had built a set of mechanisms for transmitting wisdom that actually worked. This is what they were, how they functioned, and what destroyed them.</p>
 </header>
 
-
-
 <div class="main">
 
   <!-- 01 THE GUILD SYSTEM -->
-  <div class="mechanism" style="--m-color: #c9a84c;">
+  <div class="mechanism" style="--m-color: var(--gold);">
     <div class="mechanism-meta">
       <div class="mechanism-number">01</div>
       <div class="mechanism-tag">Mechanism</div>
@@ -398,7 +425,7 @@
         <span>12th–18th century</span>
         <span>Europe, China, Islamic world, Japan</span>
       </div>
-      <div class="status-badge" style="--status-color: #c47b6b;">Dismantled</div>
+      <div class="status-badge" style="--status-color: var(--coral);">Dismantled</div>
     </div>
     <div class="mechanism-content">
       <div class="mechanism-lede">The guild was not primarily an educational institution. It was an access control system — designed to protect tacit knowledge by controlling who could acquire it, and under what conditions.</div>
@@ -420,7 +447,7 @@
   </div>
 
   <!-- 02 PROFESSIONAL APPRENTICESHIP -->
-  <div class="mechanism" style="--m-color: #7eb8a4;">
+  <div class="mechanism" style="--m-color: var(--teal);">
     <div class="mechanism-meta">
       <div class="mechanism-number">02</div>
       <div class="mechanism-tag">Mechanism</div>
@@ -430,7 +457,7 @@
         <span>14th–19th century</span>
         <span>Law, Medicine, Architecture</span>
       </div>
-      <div class="status-badge" style="--status-color: #c47b6b;">Professionalised away</div>
+      <div class="status-badge" style="--status-color: var(--coral);">Professionalised away</div>
     </div>
     <div class="mechanism-content">
       <div class="mechanism-lede">The guild model was exported into the professions — and in its legal form, it produced one of the most candid transmission mechanisms ever designed, one that made no pretence of being educational in any modern sense.</div>
@@ -451,7 +478,7 @@
   </div>
 
   <!-- 03 RELIGIOUS AND CONTEMPLATIVE LINEAGES -->
-  <div class="mechanism" style="--m-color: #c47b6b;">
+  <div class="mechanism" style="--m-color: var(--coral);">
     <div class="mechanism-meta">
       <div class="mechanism-number">03</div>
       <div class="mechanism-tag">Mechanism</div>
@@ -461,7 +488,7 @@
         <span>Antiquity – present</span>
         <span>Buddhist, Sufi, Benedictine, Rabbinic traditions</span>
       </div>
-      <div class="status-badge" style="--status-color: #c9a84c;">Weakened but surviving</div>
+      <div class="status-badge" style="--status-color: var(--gold);">Weakened but surviving</div>
     </div>
     <div class="mechanism-content">
       <div class="mechanism-lede">If you want to understand what robust multi-generational knowledge transmission looks like across centuries, the contemplative traditions are the most successful experiments ever run — and they barely resemble education at all.</div>
@@ -483,7 +510,7 @@
   </div>
 
   <!-- 04 THE PHILOSOPHICAL SCHOOL -->
-  <div class="mechanism" style="--m-color: #8b7ec8;">
+  <div class="mechanism" style="--m-color: var(--purple);">
     <div class="mechanism-meta">
       <div class="mechanism-number">04</div>
       <div class="mechanism-tag">Mechanism</div>
@@ -493,7 +520,7 @@
         <span>5th century BCE – 19th century CE</span>
         <span>Athens, Alexandria, medieval Islamic world, German Bildung</span>
       </div>
-      <div class="status-badge" style="--status-color: #c47b6b;">Replaced by the university</div>
+      <div class="status-badge" style="--status-color: var(--coral);">Replaced by the university</div>
     </div>
     <div class="mechanism-content">
       <div class="mechanism-lede">Socrates wrote nothing. This was not carelessness — it was a position. He understood that what he was transmitting could not survive the journey into text.</div>
@@ -513,8 +540,8 @@
     </div>
   </div>
 
-  <!-- 05 THE FAMILY BUSINESS LINEAGE -->
-  <div class="mechanism" style="--m-color: #c9a84c;">
+  <!-- 05 THE FAMILY LINEAGE -->
+  <div class="mechanism" style="--m-color: var(--gold);">
     <div class="mechanism-meta">
       <div class="mechanism-number">05</div>
       <div class="mechanism-tag">Mechanism</div>
@@ -524,7 +551,7 @@
         <span>All of recorded history</span>
         <span>Merchant families, dynastic governance, craft dynasties</span>
       </div>
-      <div class="status-badge" style="--status-color: #c47b6b;">Structurally undermined by its own success</div>
+      <div class="status-badge" style="--status-color: var(--coral);">Structurally undermined by its own success</div>
     </div>
     <div class="mechanism-content">
       <div class="mechanism-lede">The family business is worth examining precisely because it so frequently fails — and in failing, reveals something structural about the problem rather than anything accidental about the family.</div>

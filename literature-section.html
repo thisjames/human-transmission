@@ -5,240 +5,280 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Other Disciplines Say — The Forgetting Machine</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
   :root {
-    --bg: #0e0e0e;
-    --surface: #161616;
-    --border: #2a2a2a;
-    --accent: #c9a84c;
-    --accent2: #7eb8a4;
-    --accent3: #c47b6b;
-    --accent4: #8b7ec8;
-    --text: #e8e4dc;
-    --muted: #6b6760;
-    --highlight: #1e1e1e;
+    --bg:        #0e0e0e;
+    --surface:   #161616;
+    --highlight: #1c1c1c;
+    --border:    #2a2a2a;
+    --text-hi:   #e8e4dc;
+    --text:      #c8c3b8;
+    --text-lo:   #9e9a92;
+    --muted:     #6b6760;
+    --gold:      #c9a84c;
+    --teal:      #7eb8a4;
+    --coral:     #c47b6b;
+    --purple:    #8b7ec8;
+    --font-body:    'Lora', Georgia, serif;
+    --font-display: 'Playfair Display', serif;
+    --font-mono:    'DM Mono', monospace;
+    --body-size: 16px;
+    --body-lh:   1.9;
+    --measure:   68ch;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    font-weight: 400;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  header {
-    padding: 48px 60px 32px;
-    border-bottom: 1px solid var(--border);
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .header-eyebrow {
-    font-family: 'DM Mono', monospace;
+  /* ── NAV ─────────────────────────────────────────────── */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: stretch;
+    height: 44px;
+  }
+  .nav-brand {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  .nav-brand:hover { opacity: 0.75; }
+  .nav-links { display: flex; flex: 1; overflow-x: auto; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .nav-link:hover { color: var(--text); background: var(--surface); }
+  .nav-link.current {
+    color: var(--gold);
+    background: rgba(201,168,76,0.06);
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: -1px;
+  }
+
+  /* ── PAGE HEADER ─────────────────────────────────────── */
+  .page-header {
+    padding: 52px 60px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
+    color: var(--gold);
+    margin-bottom: 20px;
   }
-
-  header h1 {
-    font-family: 'Playfair Display', serif;
+  .page-header h1 {
+    font-family: var(--font-display);
     font-size: clamp(28px, 4vw, 52px);
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1.08;
     letter-spacing: -0.02em;
+    color: var(--text-hi);
   }
-
-  header h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
+  .page-header h1 em { font-style: italic; color: var(--gold); }
   .header-intro {
-    margin-top: 20px;
-    max-width: 680px;
-    font-size: 16px;
-    line-height: 1.75;
-    color: #a8a49c;
+    margin-top: 22px;
+    max-width: var(--measure);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text);
   }
 
+  /* ── MAIN ────────────────────────────────────────────── */
   .main {
-    padding: 60px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    padding: 0 60px 80px;
   }
 
-  /* DISCIPLINE BLOCK */
+  /* ── DISCIPLINE BLOCK ────────────────────────────────── */
   .discipline {
     border-bottom: 1px solid var(--border);
-    padding: 52px 0;
+    padding: 56px 0;
     display: grid;
     grid-template-columns: 220px 1fr;
-    gap: 60px;
+    gap: 64px;
     align-items: start;
   }
-
-  .discipline:last-child {
-    border-bottom: none;
-  }
+  .discipline:last-of-type { border-bottom: none; }
 
   .discipline-meta {
     position: sticky;
-    top: 40px;
+    top: 60px;
   }
-
   .discipline-number {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-display);
     font-size: 72px;
     font-weight: 400;
     line-height: 1;
-    color: var(--discipline-color, var(--accent));
-    opacity: 0.12;
-    margin-bottom: 8px;
+    color: var(--d-color, var(--gold));
+    opacity: 0.28;
+    margin-bottom: 12px;
   }
-
   .discipline-tag {
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--discipline-color, var(--accent));
-    margin-bottom: 12px;
+    color: var(--d-color, var(--gold));
+    margin-bottom: 10px;
   }
-
   .discipline-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-family: var(--font-display);
+    font-size: 19px;
     font-weight: 400;
     line-height: 1.3;
-    color: var(--text);
+    color: var(--text-hi);
     margin-bottom: 16px;
   }
-
   .discipline-thinkers {
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     color: var(--muted);
-    line-height: 1.8;
+    line-height: 1.9;
   }
-
   .discipline-thinkers span {
     display: block;
-    color: var(--discipline-color, var(--accent));
-    opacity: 0.7;
+    color: var(--d-color, var(--gold));
+    opacity: 0.75;
   }
 
-  /* CONTENT SIDE */
+  /* ── CONTENT SIDE ────────────────────────────────────── */
   .discipline-content {
     display: flex;
     flex-direction: column;
     gap: 28px;
+    max-width: var(--measure);
   }
 
   .discipline-lede {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(17px, 2vw, 21px);
+    font-family: var(--font-display);
+    font-size: clamp(17px, 1.8vw, 20px);
     font-weight: 400;
     font-style: italic;
-    line-height: 1.5;
-    color: #c8c4bc;
-    border-left: 2px solid var(--discipline-color, var(--accent));
+    line-height: 1.55;
+    color: var(--text-hi);
+    border-left: 2px solid var(--d-color, var(--gold));
     padding-left: 24px;
   }
 
   .discipline-body {
-    font-size: 15px;
-    line-height: 1.85;
-    color: #9a9690;
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    color: var(--text);
   }
+  .discipline-body p + p { margin-top: 20px; }
+  .discipline-body strong { color: var(--text-hi); font-weight: 500; }
 
-  .discipline-body p + p {
-    margin-top: 18px;
-  }
-
-  .discipline-body strong {
-    color: #c8c4bc;
-    font-weight: 500;
-  }
-
-  /* KEY INSIGHT CALLOUT */
+  /* ── KEY INSIGHT ─────────────────────────────────────── */
   .key-insight {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--discipline-color, var(--accent));
+    border-left: 3px solid var(--d-color, var(--gold));
     padding: 20px 24px;
-    font-size: 13px;
-    line-height: 1.65;
-    color: #8a8680;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-lo);
+    font-family: var(--font-body);
   }
-
   .key-insight::before {
-    content: 'KEY INSIGHT';
+    content: 'Key Insight';
     display: block;
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 9px;
     letter-spacing: 0.14em;
-    color: var(--discipline-color, var(--accent));
-    margin-bottom: 8px;
-    opacity: 0.8;
+    text-transform: uppercase;
+    color: var(--d-color, var(--gold));
+    margin-bottom: 10px;
+    opacity: 0.85;
   }
 
-  /* SYNTHESIS BLOCK */
+  /* ── SYNTHESIS ───────────────────────────────────────── */
   .synthesis {
     margin-top: 60px;
-    padding: 48px 40px;
+    padding: 44px 40px;
     background: var(--surface);
-    border: 1px solid var(--accent);
+    border: 1px solid var(--gold);
     position: relative;
   }
-
   .synthesis::before {
-    content: 'SYNTHESIS';
+    content: 'Synthesis';
     position: absolute;
     top: -10px;
     left: 32px;
     background: var(--bg);
     padding: 0 8px;
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
-    color: var(--accent);
+    text-transform: uppercase;
+    color: var(--gold);
   }
-
   .synthesis h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(18px, 2.5vw, 26px);
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.2vw, 24px);
     font-weight: 400;
     line-height: 1.4;
-    color: var(--text);
+    color: var(--text-hi);
     margin-bottom: 20px;
   }
-
   .synthesis p {
-    font-size: 15px;
-    line-height: 1.85;
-    color: #9a9690;
-    max-width: 780px;
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    color: var(--text);
+    max-width: var(--measure);
   }
+  .synthesis p + p { margin-top: 18px; }
+  .synthesis strong { color: var(--text-hi); font-weight: 500; }
 
-  .synthesis p + p {
-    margin-top: 16px;
-  }
-
-  .synthesis strong {
-    color: #c8c4bc;
-    font-weight: 500;
-  }
-
+  /* ── FOOTER ──────────────────────────────────────────── */
   footer {
     padding: 24px 60px;
     border-top: 1px solid var(--border);
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 11px;
     color: var(--muted);
     display: flex;
@@ -246,18 +286,33 @@
     align-items: center;
   }
 
+  /* ── RESPONSIVE ──────────────────────────────────────── */
   @media (max-width: 860px) {
-    header, .main, footer { padding-left: 24px; padding-right: 24px; }
+    .page-header, .main, footer { padding-left: 24px; padding-right: 24px; }
     .discipline { grid-template-columns: 1fr; gap: 28px; }
     .discipline-meta { position: static; }
     .discipline-number { font-size: 48px; }
+    .discipline-content { max-width: 100%; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-eyebrow"><a href="index.html" style="color:var(--accent); text-decoration:none; opacity:0.7;">← Framework</a> &nbsp;/&nbsp; The Forgetting Machine — Literature</div>
+<!-- NAV -->
+<nav class="site-nav">
+  <a class="nav-brand" href="index.html">TFM</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Framework</a>
+    <a class="nav-link current" href="literature-section.html">What Disciplines Say</a>
+    <a class="nav-link" href="transmission-machines.html">What We Used To Do</a>
+    <a class="nav-link" href="infographic.html">Infographic</a>
+    <a class="nav-link" href="bibliography.html">Bibliography</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="eyebrow">The Forgetting Machine</div>
   <h1>What Other Disciplines<br>Have <em>Already</em> Found</h1>
   <p class="header-intro">No single field has named this problem directly. But philosophy, anthropology, sociology and cognitive science have each been circling it for decades — arriving at the same terrain from different directions, without quite realising they were describing the same thing.</p>
 </header>
@@ -265,7 +320,7 @@
 <div class="main">
 
   <!-- PHILOSOPHY -->
-  <div class="discipline" style="--discipline-color: #c9a84c;">
+  <div class="discipline" style="--d-color: var(--gold);">
     <div class="discipline-meta">
       <div class="discipline-number">01</div>
       <div class="discipline-tag">Discipline</div>
@@ -289,7 +344,7 @@
   </div>
 
   <!-- EVOLUTIONARY ANTHROPOLOGY -->
-  <div class="discipline" style="--discipline-color: #7eb8a4;">
+  <div class="discipline" style="--d-color: var(--teal);">
     <div class="discipline-meta">
       <div class="discipline-number">02</div>
       <div class="discipline-tag">Discipline</div>
@@ -313,7 +368,7 @@
   </div>
 
   <!-- SOCIOLOGY OF KNOWLEDGE -->
-  <div class="discipline" style="--discipline-color: #c47b6b;">
+  <div class="discipline" style="--d-color: var(--coral);">
     <div class="discipline-meta">
       <div class="discipline-number">03</div>
       <div class="discipline-tag">Discipline</div>
@@ -337,7 +392,7 @@
   </div>
 
   <!-- COGNITIVE SCIENCE -->
-  <div class="discipline" style="--discipline-color: #8b7ec8;">
+  <div class="discipline" style="--d-color: var(--purple);">
     <div class="discipline-meta">
       <div class="discipline-number">04</div>
       <div class="discipline-tag">Discipline</div>

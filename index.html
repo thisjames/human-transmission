@@ -390,6 +390,45 @@
     background: var(--border);
   }
 
+  /* NAV STRIP */
+  .site-nav {
+    padding: 0 60px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+  }
+
+  .site-nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 20px;
+    border-right: 1px solid var(--border);
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .site-nav a:first-child { padding-left: 0; }
+
+  .site-nav a:hover {
+    color: var(--accent);
+    background: var(--surface);
+  }
+
+  .site-nav a .nav-arrow {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .site-nav a:hover .nav-arrow {
+    opacity: 1;
+  }
+
   footer {
     padding: 24px 60px;
     border-top: 1px solid var(--border);
@@ -402,7 +441,9 @@
   }
 
   @media (max-width: 900px) {
-    header, .main, footer { padding-left: 24px; padding-right: 24px; }
+    header, .site-nav, .main, footer { padding-left: 24px; padding-right: 24px; }
+    .site-nav { overflow-x: auto; flex-wrap: nowrap; }
+    .site-nav a { white-space: nowrap; }
     .pillars, .outputs { grid-template-columns: 1fr; }
     .scales, .questions-grid { grid-template-columns: 1fr; }
   }
@@ -416,8 +457,6 @@
     <p>Click any node to expand — v0.1 working draft</p>
   </div>
   <div style="display:flex; flex-direction:column; align-items:flex-end; gap:12px;">
-    <a href="literature-section.html" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); text-decoration:none; border:1px solid var(--accent); padding:8px 16px; transition:background 0.2s;" onmouseover="this.style.background='#1e1a10'" onmouseout="this.style.background='transparent'">The Research →</a>
-    <a href="infographic.html" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); text-decoration:none; border:1px solid var(--accent); padding:8px 16px; transition:background 0.2s;" onmouseover="this.style.background='#1e1a10'" onmouseout="this.style.background='transparent'">The Infographic →</a>
     <div class="legend">
       <div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div> Core problem</div>
       <div class="legend-item"><div class="legend-dot" style="background:#7eb8a4"></div> Micro scale</div>
@@ -426,6 +465,13 @@
     </div>
   </div>
 </header>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <a href="literature-section.html">What Other Disciplines Say <span class="nav-arrow">→</span></a>
+  <a href="transmission-machines.html">What We Used To Do <span class="nav-arrow">→</span></a>
+  <a href="infographic.html">The Infographic <span class="nav-arrow">→</span></a>
+</nav>
 
 <!-- TAGLINE BANNER -->
 <div style="padding: 28px 60px; border-bottom: 1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
@@ -437,7 +483,7 @@
 
   <!-- CENTRAL THESIS -->
   <div class="core-paradox" onclick="toggleExpand(this)">
-    <h2>Civilisational knowledge compounds across generations. Human capacity to absorb it does not. The gap between what humanity collectively knows and what any individual can master is widening and accelerating.</h2>
+    <h2>Civilisational knowledge compounds across generations. Human capacity to absorb it does not. The gap between what humanity collectively knows and what any individual can master is structurally widening — and accelerating.</h2>
     <div class="expandable-content">
       Humanity's unique gift — cumulative, transmissible knowledge — has produced extraordinary civilisational progress. Yet this same system contains a deep structural flaw: while collective knowledge grows exponentially, individual human capacity to absorb it remains biologically fixed. Every person arrives blank, requires ~20 years to become functional, and can only ever master a narrow fragment. Wisdom — the capacity to judge, connect and navigate — resists language and cannot be meaningfully inherited, meaning each generation must re-earn it from scratch. The result is a civilisation of immense collective power but fragmented individual understanding.
     </div>

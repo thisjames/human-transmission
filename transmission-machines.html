@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Used To Do — The Forgetting Machine</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #c9a84c;
+    --accent2: #7eb8a4;
+    --accent3: #c47b6b;
+    --accent4: #8b7ec8;
+    --text: #e8e4dc;
+    --muted: #6b6760;
+    --highlight: #1e1e1e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  header {
+    padding: 48px 60px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .header-eyebrow a {
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .header-eyebrow a:hover { opacity: 1; }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-intro {
+    margin-top: 20px;
+    max-width: 680px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #a8a49c;
+  }
+
+
+
+  /* MAIN CONTENT */
+  .main {
+    padding: 60px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* MECHANISM BLOCK */
+  .mechanism {
+    border-bottom: 1px solid var(--border);
+    padding: 56px 0;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .mechanism:last-of-type {
+    border-bottom: none;
+  }
+
+  /* META COLUMN */
+  .mechanism-meta {
+    position: sticky;
+    top: 40px;
+  }
+
+  .mechanism-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--m-color, var(--accent));
+    opacity: 0.12;
+    margin-bottom: 8px;
+  }
+
+  .mechanism-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--m-color, var(--accent));
+    margin-bottom: 12px;
+  }
+
+  .mechanism-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .mechanism-era {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 4px;
+  }
+
+  .mechanism-era span {
+    display: block;
+    color: var(--m-color, var(--accent));
+    opacity: 0.7;
+    font-size: 10px;
+  }
+
+  /* STATUS BADGE */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--status-color, #6b6760);
+    flex-shrink: 0;
+  }
+
+  /* CONTENT COLUMN */
+  .mechanism-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .mechanism-lede {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 2vw, 21px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: #c8c4bc;
+    border-left: 2px solid var(--m-color, var(--accent));
+    padding-left: 24px;
+  }
+
+  .mechanism-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #9a9690;
+  }
+
+  .mechanism-body p + p {
+    margin-top: 18px;
+  }
+
+  .mechanism-body strong {
+    color: #c8c4bc;
+    font-weight: 500;
+  }
+
+  /* HOW IT WORKED / WHY IT FAILED — two-column callout */
+  .dual-callout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #8a8680;
+  }
+
+  .callout::before {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .callout.how-it-worked {
+    border-left: 3px solid var(--m-color, var(--accent));
+  }
+
+  .callout.how-it-worked::before {
+    content: 'How it worked';
+    color: var(--m-color, var(--accent));
+  }
+
+  .callout.why-it-failed {
+    border-left: 3px solid #c47b6b;
+  }
+
+  .callout.why-it-failed::before {
+    content: 'Why it failed';
+    color: #c47b6b;
+  }
+
+  /* SHARED PROPERTIES BLOCK */
+  .shared-properties {
+    margin-top: 52px;
+    padding: 48px 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .shared-properties::before {
+    content: 'WHAT THEY ALL HAD IN COMMON';
+    position: absolute;
+    top: -10px;
+    left: 32px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+
+  .properties-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .prop-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .prop-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .prop-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #8a8680;
+  }
+
+  /* SYNTHESIS / CLOSING */
+  .synthesis {
+    margin-top: 60px;
+    padding: 48px 40px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    position: relative;
+  }
+
+  .synthesis::before {
+    content: 'THE PATTERN';
+    position: absolute;
+    top: -10px;
+    left: 32px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+
+  .synthesis h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .synthesis p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #9a9690;
+    max-width: 780px;
+  }
+
+  .synthesis p + p {
+    margin-top: 16px;
+  }
+
+  .synthesis strong {
+    color: #c8c4bc;
+    font-weight: 500;
+  }
+
+  footer {
+    padding: 24px 60px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    header, .main, footer {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .mechanism {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .mechanism-meta { position: static; }
+    .mechanism-number { font-size: 48px; }
+    .dual-callout { grid-template-columns: 1fr; }
+    .properties-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">
+    <a href="index.html">← Framework</a>
+    &nbsp;/&nbsp;
+    The Forgetting Machine — What We Used To Do
+  </div>
+  <h1>What We <em>Used To Do</em></h1>
+  <p class="header-intro">Before the university replaced the guild, the certificate replaced the apprenticeship, and the textbook replaced the master — civilisation had built a set of mechanisms for transmitting wisdom that actually worked. This is what they were, how they functioned, and what destroyed them.</p>
+</header>
+
+
+
+<div class="main">
+
+  <!-- 01 THE GUILD SYSTEM -->
+  <div class="mechanism" style="--m-color: #c9a84c;">
+    <div class="mechanism-meta">
+      <div class="mechanism-number">01</div>
+      <div class="mechanism-tag">Mechanism</div>
+      <div class="mechanism-name">The Guild System</div>
+      <div class="mechanism-era">
+        Active period
+        <span>12th–18th century</span>
+        <span>Europe, China, Islamic world, Japan</span>
+      </div>
+      <div class="status-badge" style="--status-color: #c47b6b;">Dismantled</div>
+    </div>
+    <div class="mechanism-content">
+      <div class="mechanism-lede">The guild was not primarily an educational institution. It was an access control system — designed to protect tacit knowledge by controlling who could acquire it, and under what conditions.</div>
+      <div class="mechanism-body">
+        <p>The structure was precise: <strong>apprentice → journeyman → master</strong>. This wasn't a hierarchy of status — it was a theory of knowledge transmission made institutional. The apprentice lived with the master, ate at their table, watched them make decisions under pressure, and observed how they handled failure. The knowledge being transmitted was inseparable from the texture of that daily proximity.</p>
+        <p>The journeyman period — several years of deliberate travel, working in different masters' workshops across different towns — was particularly sophisticated. It was an inoculation against a specific failure mode: learning one person's idiosyncratic interpretation of the craft rather than the craft itself. Variation was built into the design of the system.</p>
+        <p>The seven-year apprenticeship wasn't arbitrary bureaucracy. It reflected an empirical finding, accumulated over generations of practice, about how long genuine transfer actually took. The guilds had, without naming it, solved for tacit knowledge transmission — and their answer was: years of co-presence, not months of instruction.</p>
+        <p>The Venetian glass guilds are the extreme case. The Muranese glassmakers were physically confined to their island — originally for fire safety, but the isolation became a transmission moat. The knowledge was so inseparable from the living community of practitioners that when Napoleon dismantled the guild system in the early 19th century, significant technical knowledge was simply lost. The chain broke and carried its cargo with it.</p>
+      </div>
+      <div class="dual-callout">
+        <div class="callout how-it-worked">
+          Tacit knowledge was transmitted through years of co-presence, embodied practice, and exposure to judgment under real conditions — not instruction or documentation. The craft lived in the practitioner community, not in any text.
+        </div>
+        <div class="callout why-it-failed">
+          Liberal economic reform in the early 19th century — particularly in post-Napoleonic Europe — dismantled guild structures as monopolistic and anti-competitive. The knowledge protection they offered was inseparable from the market protection that reformers rightly resented. Both were removed simultaneously.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 PROFESSIONAL APPRENTICESHIP -->
+  <div class="mechanism" style="--m-color: #7eb8a4;">
+    <div class="mechanism-meta">
+      <div class="mechanism-number">02</div>
+      <div class="mechanism-tag">Mechanism</div>
+      <div class="mechanism-name">Professional Apprenticeship</div>
+      <div class="mechanism-era">
+        Active period
+        <span>14th–19th century</span>
+        <span>Law, Medicine, Architecture</span>
+      </div>
+      <div class="status-badge" style="--status-color: #c47b6b;">Professionalised away</div>
+    </div>
+    <div class="mechanism-content">
+      <div class="mechanism-lede">The guild model was exported into the professions — and in its legal form, it produced one of the most candid transmission mechanisms ever designed, one that made no pretence of being educational in any modern sense.</div>
+      <div class="mechanism-body">
+        <p>The English Inns of Court, from the 14th century onward, trained barristers through a mechanism that sounds almost deliberately absurd to modern ears: <strong>eating dinners</strong>. Candidates were required to attend a set number of formal dinners at their Inn alongside practising lawyers. No examination. No curriculum. The knowledge being transmitted was not legal rules — those could be read in any library — but something altogether less codifiable: how to read a courtroom, how to construct an argument for a specific kind of audience, when to press and when to concede.</p>
+        <p>The dinner requirement was a delivery mechanism for sustained informal proximity to people who already possessed that judgment. It forced candidates into recurring, unstructured contact with practitioners in conditions where the practitioners were relaxed, candid, and unperforming. This is precisely the context in which tacit knowledge tends to leak.</p>
+        <p>Medical training carried the same logic beneath its more structured surface. Hospital ward rounds — a senior physician walking junior doctors through live cases, making decisions aloud, tolerating questions — were not primarily about information delivery. The Socratic interrogation of a junior doctor at the bedside made the structure of clinical judgment <strong>visible by externalising it under pressure</strong>. What was being transmitted was the shape of expert uncertainty, not facts about disease.</p>
+      </div>
+      <div class="dual-callout">
+        <div class="callout how-it-worked">
+          Informal sustained proximity to practising experts — at meals, on wards, in chambers — allowed the transmission of judgment through observation rather than instruction. The setting was designed to be unguarded enough that real reasoning became visible.
+        </div>
+        <div class="callout why-it-failed">
+          19th and 20th century professionalisation standardised entry requirements around examinable curricula. The shift was well-intentioned — democratising access, reducing nepotism — but replaced transmission mechanisms with knowledge-testing mechanisms. The dinner was replaced by the exam.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 RELIGIOUS AND CONTEMPLATIVE LINEAGES -->
+  <div class="mechanism" style="--m-color: #c47b6b;">
+    <div class="mechanism-meta">
+      <div class="mechanism-number">03</div>
+      <div class="mechanism-tag">Mechanism</div>
+      <div class="mechanism-name">Religious &amp; Contemplative Lineages</div>
+      <div class="mechanism-era">
+        Active period
+        <span>Antiquity – present</span>
+        <span>Buddhist, Sufi, Benedictine, Rabbinic traditions</span>
+      </div>
+      <div class="status-badge" style="--status-color: #c9a84c;">Weakened but surviving</div>
+    </div>
+    <div class="mechanism-content">
+      <div class="mechanism-lede">If you want to understand what robust multi-generational knowledge transmission looks like across centuries, the contemplative traditions are the most successful experiments ever run — and they barely resemble education at all.</div>
+      <div class="mechanism-body">
+        <p>Buddhist teaching lineages, Sufi orders, Jewish rabbinic chains, Benedictine communities — these maintained coherent traditions of practice across centuries, in some cases millennia, through mechanisms that make sense only once you accept that the most important knowledge is relational rather than textual. The text was the scaffolding; the living transmission was the payload.</p>
+        <p>The concept of <em>isnad</em> in Islamic scholarship — the chain of transmission, the requirement to name every teacher through whom a teaching passed — is a quality control system for tacit knowledge. It acknowledges explicitly that the same words mean something different depending on who transmitted them and in what context. The same instruction received from a shallow practitioner and a deep one carries different content, even when the words are identical.</p>
+        <p>The Benedictine rule added a dimension that turns out to be structurally critical: <strong>stability</strong>. Monks vowed to remain in one community. This appears disciplinary but is epistemically essential — it creates the long-term relationships within which trust, correction, and gradual revelation of more demanding knowledge could accumulate across decades. Transient relationships transmit surface knowledge. Enduring relationships transmit depth.</p>
+        <p>The result is transmission chains of extraordinary durability. The Noh theatre tradition has maintained coherent practice for over 650 years through family lineages, with training beginning in early childhood. The Japanese martial arts kata — body-encoded patterns that must be performed thousands of times before they are understood — represent perhaps the most deliberate attempt ever made to transmit tacit knowledge by bypassing language almost entirely.</p>
+      </div>
+      <div class="dual-callout">
+        <div class="callout how-it-worked">
+          Stability, duration, and relational depth created conditions for gradual revelation of tacit content. Quality control via lineage chains. Knowledge encoded in practice patterns (kata, liturgy, ritual) that transmitted through body rather than text.
+        </div>
+        <div class="callout why-it-failed">
+          Secularisation and geographic mobility broke the stability requirement. Communities scattered. Novitiate periods compressed. The institutional shells persisted in many cases while the transmission function hollowed out — creating organisations that look like lineage communities but no longer function as them.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 THE PHILOSOPHICAL SCHOOL -->
+  <div class="mechanism" style="--m-color: #8b7ec8;">
+    <div class="mechanism-meta">
+      <div class="mechanism-number">04</div>
+      <div class="mechanism-tag">Mechanism</div>
+      <div class="mechanism-name">The Philosophical School</div>
+      <div class="mechanism-era">
+        Active period
+        <span>5th century BCE – 19th century CE</span>
+        <span>Athens, Alexandria, medieval Islamic world, German Bildung</span>
+      </div>
+      <div class="status-badge" style="--status-color: #c47b6b;">Replaced by the university</div>
+    </div>
+    <div class="mechanism-content">
+      <div class="mechanism-lede">Socrates wrote nothing. This was not carelessness — it was a position. He understood that what he was transmitting could not survive the journey into text.</div>
+      <div class="mechanism-body">
+        <p>The philosophical schools of antiquity — Plato's Academy, the Lyceum, the Stoic portico — operated on an assumption now almost entirely lost from higher education: that transmission of philosophy required proximity to a philosopher, not proximity to philosophical texts. What Socrates transmitted was not propositional content but a <strong>way of inhabiting questions</strong>: how to sit with uncertainty without resolving it prematurely, how to follow an argument wherever it led rather than toward a desired conclusion, how to treat one's own confident beliefs as the most suspect of all.</p>
+        <p>The dialogic method was a transmission technology. It forced students to think alongside the master in real time, exposed to the master's actual reasoning process — including its hesitations, reversals, and dead ends — rather than to its polished conclusions. The Platonic dialogues are records of this process; they are not substitutes for it. Reading the Meno transmits something. Being interrogated in the manner of Meno transmits something categorically different.</p>
+        <p>The German <em>Bildung</em> tradition — running from Humboldt through the 19th century research university ideal — attempted to formalise this. Its claim was that genuine education forms the person rather than fills a vessel; that the PhD supervisor's role was to model how to be a researcher, not to convey knowledge about a research topic. At its best, the doctoral relationship still functions this way. It is the closest thing the modern university retains to the original transmission mechanism.</p>
+      </div>
+      <div class="dual-callout">
+        <div class="callout how-it-worked">
+          Live dialogic engagement forced students to think alongside the master in real time. The reasoning process — including its uncertainties — was made visible. This transmitted judgment, not just content. Proximity to a person who exemplified a mode of thought was the delivery mechanism.
+        </div>
+        <div class="callout why-it-failed">
+          Mass university expansion replaced the one-to-many pedagogic relationship with the lecture — efficient for information delivery, useless for judgment transmission. The student-to-faculty ratio makes the dialogic model economically impossible. The credential replaced the formation.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 THE FAMILY BUSINESS LINEAGE -->
+  <div class="mechanism" style="--m-color: #c9a84c;">
+    <div class="mechanism-meta">
+      <div class="mechanism-number">05</div>
+      <div class="mechanism-tag">Mechanism</div>
+      <div class="mechanism-name">The Family Lineage</div>
+      <div class="mechanism-era">
+        Active period
+        <span>All of recorded history</span>
+        <span>Merchant families, dynastic governance, craft dynasties</span>
+      </div>
+      <div class="status-badge" style="--status-color: #c47b6b;">Structurally undermined by its own success</div>
+    </div>
+    <div class="mechanism-content">
+      <div class="mechanism-lede">The family business is worth examining precisely because it so frequently fails — and in failing, reveals something structural about the problem rather than anything accidental about the family.</div>
+      <div class="mechanism-body">
+        <p>Thomas Mann's <em>Buddenbrooks</em> is almost a novel-length treatment of the project's micro-scale thesis: a merchant family across four generations, each inheriting more refinement and less commercial vitality than the last. The founder is coarse, driven, and formidably competent. His grandchildren are cultured, sensitive, and practically helpless. Mann read this as tragedy. The framework reads it as structural inevitability.</p>
+        <p>The founder's judgment was forged by navigating genuine scarcity, genuine risk, and genuine consequences. The heir inherits the rewards of that judgment — and those rewards systematically eliminate the conditions under which the judgment formed. <strong>Success destroys the formative friction it depended on.</strong> The chain of transmission breaks not through neglect but through love: the founder gives the heir everything except the one thing that cannot be given.</p>
+        <p>The exceptions — family enterprises that do successfully transmit practical wisdom across generations — are instructive precisely because they are artificial. They involve deliberate re-introduction of adversity: heirs who are required to begin at the bottom, who are denied insulation from consequence during formative years, who must experience real failure before taking on real authority. This is a designed reconstruction of the friction that success eliminated. It works, when it works, because someone in the family understood the mechanism clearly enough to override their instinct to protect.</p>
+      </div>
+      <div class="dual-callout">
+        <div class="callout how-it-worked">
+          At its best, proximity across a lifetime — observing the founder navigate real decisions, real failures, and real recovery — transmitted the felt texture of judgment that no instruction could convey. Long duration and genuine stakes were the essential ingredients.
+        </div>
+        <div class="callout why-it-failed">
+          Success eliminated the very conditions — scarcity, consequence, genuine risk — that made the transmission possible. The mechanism was undermined by the thing it was meant to propagate. No design has fully solved this; it requires deliberate, often painful override of protective instinct.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT THEY ALL HAD IN COMMON -->
+  <div class="shared-properties">
+    <div class="properties-grid">
+      <div class="prop-item">
+        <div class="prop-title">Duration</div>
+        <div class="prop-body">Every serious transmission mechanism required years, not weeks. The seven-year apprenticeship, the monastic novitiate, the decades of doctoral formation — these timelines were not cultural affectation. They reflected empirical knowledge about how long genuine transfer actually takes.</div>
+      </div>
+      <div class="prop-item">
+        <div class="prop-title">Co-presence</div>
+        <div class="prop-body">Transmission required being in the same physical space as someone who embodied the knowledge. It could not be fully mediated by text, record, or instruction. The body had to be present because the knowledge being transmitted was, in part, bodily.</div>
+      </div>
+      <div class="prop-item">
+        <div class="prop-title">Judgment under pressure, observed</div>
+        <div class="prop-body">Watching someone navigate genuine uncertainty in real time is qualitatively different from watching them explain how they would navigate it hypothetically. The ward round, the guild master handling a difficult commission, the philosopher confronted with a genuine challenge — all exposed the reasoning process, not just its outputs.</div>
+      </div>
+      <div class="prop-item">
+        <div class="prop-title">Social accountability</div>
+        <div class="prop-body">The guild certificate, the religious vow, the isnad chain — these made the transmission auditable by a community rather than assessable by an individual. Quality control was collective, not bureaucratic. The reputation of the transmitter travelled with the transmitted knowledge.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYNTHESIS -->
+  <div class="synthesis">
+    <h2>What replaced them was not better. It was cheaper and more scalable — and systematically worse at the one thing that mattered most.</h2>
+    <p>Every mechanism described here has been substantially weakened or destroyed in the last 150 years — often by forces that considered themselves progressive, rational, and democratising. The guild was dismantled as monopolistic. The Inn of Court dinner was replaced by the exam. The novitiate was compressed. The doctoral relationship was diluted by scale. All reasonable reforms, on their own terms.</p>
+    <p>What replaced them was the university degree, the professional certification, the standardised curriculum, the online course. These are extraordinarily good at transmitting <strong>explicit knowledge</strong> — facts, rules, procedures, information. None of them is a serious mechanism for transmitting the knowing-how that underlies all real expertise.</p>
+    <p>The historical record suggests something uncomfortable: the transmission of wisdom has never been a problem of information access. It has always been a problem of time, proximity, and stakes. The mechanisms that worked understood this. The mechanisms that replaced them optimised for something else entirely — and called it progress.</p>
+    <p><strong>The Forgetting Machine is, in part, what we built with those replacements.</strong></p>
+  </div>
+
+</div>
+
+<footer>
+  <span>The Forgetting Machine — What We Used To Do</span>
+  <span>Working draft · theforgettingmachine.com</span>
+</footer>
+
+</body>
+</html>
